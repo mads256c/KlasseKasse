@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "0",
-            "Test",
-            "0"}, -1);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.filerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.åbnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,8 +134,6 @@
             this.columnHeaderDiffrence});
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
-            this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
             this.listView.Location = new System.Drawing.Point(13, 28);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(811, 408);
