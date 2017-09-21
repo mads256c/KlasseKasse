@@ -44,5 +44,13 @@ namespace Klassekasse
             Diffrence = null;
             this.Close();
         }
+
+        private void textBoxDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

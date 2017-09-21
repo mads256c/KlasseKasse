@@ -41,33 +41,34 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "Forskel:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 30);
+            this.label2.Location = new System.Drawing.Point(13, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "Beskrivelse:";
             // 
             // textBoxDiffrence
             // 
-            this.textBoxDiffrence.Location = new System.Drawing.Point(57, 6);
+            this.textBoxDiffrence.Location = new System.Drawing.Point(16, 27);
             this.textBoxDiffrence.Name = "textBoxDiffrence";
-            this.textBoxDiffrence.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDiffrence.Size = new System.Drawing.Size(256, 20);
             this.textBoxDiffrence.TabIndex = 2;
-            this.textBoxDiffrence.Text = "0";
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(57, 27);
+            this.textBoxDescription.Location = new System.Drawing.Point(16, 80);
+            this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDescription.Size = new System.Drawing.Size(256, 140);
             this.textBoxDescription.TabIndex = 3;
+            this.textBoxDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxDescription_KeyDown);
             // 
             // buttonOk
             // 
@@ -75,7 +76,7 @@
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 4;
-            this.buttonOk.Text = "buttonOk";
+            this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
@@ -85,7 +86,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
-            this.buttonCancel.Text = "buttonCancel";
+            this.buttonCancel.Text = "Annuller";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -100,8 +101,11 @@
             this.Controls.Add(this.textBoxDiffrence);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormTransactionEdit";
-            this.Text = "FormTransactionEdit";
+            this.Text = "Tilføjning eller ændring";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListView;
+using System.IO;
+using static System.Windows.Forms.ListViewItem;
 
 namespace Klassekasse
 {
     public partial class FormMain : Form
     {
+
         public FormMain()
         {
             InitializeComponent();
@@ -28,23 +26,9 @@ namespace Klassekasse
                 Saldo += int.Parse(item.SubItems[2].Text);
                 item.Text = Saldo.ToString();
 
-                if (Saldo < 0)
-                {
-                    item.SubItems[0].ForeColor = Color.Red;
-                }
-                else
-                {
-                    item.SubItems[0].ForeColor = SystemColors.ControlText;
-                }
+                item.SubItems[0].ForeColor = Saldo < 0 ? Color.Red : SystemColors.ControlText;
 
-                if (int.Parse(item.SubItems[2].Text) < 0)
-                {
-                    item.SubItems[2].ForeColor = Color.Red;
-                }
-                else
-                {
-                    item.SubItems[2].ForeColor = SystemColors.ControlText;
-                }
+                item.SubItems[2].ForeColor = int.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
 
@@ -58,10 +42,46 @@ namespace Klassekasse
         {
             if (FormTransactionEdit.Description != null && FormTransactionEdit.Diffrence != null)
             {
-                listView.SelectedItems[0].SubItems[1].Text = FormTransactionEdit.Description;
+                listView.SelectedItems[0].SubItems[1].Text = FormTransactionEdit.Description.Replace(Environment.NewLine, "");
                 listView.SelectedItems[0].SubItems[2].Text = FormTransactionEdit.Diffrence.ToString();
             }
             CalculateSaldo();
+        }
+
+        /// <summary>
+        /// Opens the save as dialog and saves the file to that location.
+        /// </summary>
+        private void SaveAs()
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Save(saveFileDialog.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Saves with the name FileName.
+        /// </summary>
+        /// <param name="FileName">The name of the file.</param>
+        private void Save(string FileName)
+        {
+            List<string> diffrenceList = new List<string>();
+            List<string> descriptionList = new List<string>();
+            foreach (ListViewItem item in listView.Items)
+            {
+
+                diffrenceList.Add(item.SubItems[2].Text);
+                descriptionList.Add(item.SubItems[1].Text);
+            }
+
+            if (FileHandling.SaveFile(saveFileDialog.FileName, diffrenceList, descriptionList))
+            {
+                MessageBox.Show("Saved file successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong!");
+            }
         }
 
         /// <summary>
@@ -117,6 +137,46 @@ namespace Klassekasse
                 listView.Items.Add(item); // Add the items
                 CalculateSaldo();
             }
+        }
+
+        private void afslutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
+        }
+
+        private void åbnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                List<ListViewItem> listViewItems = FileHandling.OpenFile(openFileDialog.FileName);
+                if (listViewItems == null)
+                {
+                    MessageBox.Show("File malformed or corrupt. Please correct the file.");
+                }
+                else
+                {
+                    listView.Items.Clear();
+                    listView.Items.AddRange(listViewItems.ToArray());
+                    CalculateSaldo();
+                }
+
+            }
+
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = Application.StartupPath;
+        }
+
+        private void gemSomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveAs();
         }
     }
 }

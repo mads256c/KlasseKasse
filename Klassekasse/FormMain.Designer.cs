@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "0",
             "Test",
             "0"}, -1);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.filerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.åbnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gemSomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.afslutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +49,8 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.labelSaldo = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             this.filerToolStripMenuItem,
             this.omToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.MinimumSize = new System.Drawing.Size(400, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(836, 24);
             this.menuStrip.TabIndex = 0;
@@ -69,7 +71,6 @@
             // 
             this.filerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.åbnToolStripMenuItem,
-            this.gemToolStripMenuItem,
             this.gemSomToolStripMenuItem,
             this.toolStripSeparator1,
             this.afslutToolStripMenuItem});
@@ -80,37 +81,35 @@
             // åbnToolStripMenuItem
             // 
             this.åbnToolStripMenuItem.Name = "åbnToolStripMenuItem";
-            this.åbnToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.åbnToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.åbnToolStripMenuItem.Text = "Åbn";
-            // 
-            // gemToolStripMenuItem
-            // 
-            this.gemToolStripMenuItem.Name = "gemToolStripMenuItem";
-            this.gemToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.gemToolStripMenuItem.Text = "Gem";
+            this.åbnToolStripMenuItem.Click += new System.EventHandler(this.åbnToolStripMenuItem_Click);
             // 
             // gemSomToolStripMenuItem
             // 
             this.gemSomToolStripMenuItem.Name = "gemSomToolStripMenuItem";
-            this.gemSomToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.gemSomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gemSomToolStripMenuItem.Text = "Gem som";
+            this.gemSomToolStripMenuItem.Click += new System.EventHandler(this.gemSomToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // afslutToolStripMenuItem
             // 
             this.afslutToolStripMenuItem.Name = "afslutToolStripMenuItem";
-            this.afslutToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.afslutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.afslutToolStripMenuItem.Text = "Afslut";
+            this.afslutToolStripMenuItem.Click += new System.EventHandler(this.afslutToolStripMenuItem_Click);
             // 
             // omToolStripMenuItem
             // 
             this.omToolStripMenuItem.Name = "omToolStripMenuItem";
             this.omToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.omToolStripMenuItem.Text = "Om";
+            this.omToolStripMenuItem.Click += new System.EventHandler(this.omToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -130,6 +129,9 @@
             // 
             // listView
             // 
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderSaldo,
             this.columnHeaderDescription,
@@ -137,7 +139,7 @@
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
             this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.listView.Location = new System.Drawing.Point(13, 28);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(811, 408);
@@ -163,6 +165,7 @@
             // 
             // buttonAdd
             // 
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAdd.Location = new System.Drawing.Point(748, 443);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
@@ -173,6 +176,7 @@
             // 
             // buttonRemove
             // 
+            this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonRemove.Location = new System.Drawing.Point(667, 443);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
@@ -183,6 +187,7 @@
             // 
             // buttonEdit
             // 
+            this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEdit.Location = new System.Drawing.Point(586, 443);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
@@ -193,12 +198,21 @@
             // 
             // labelSaldo
             // 
+            this.labelSaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSaldo.AutoSize = true;
             this.labelSaldo.Location = new System.Drawing.Point(13, 452);
             this.labelSaldo.Name = "labelSaldo";
             this.labelSaldo.Size = new System.Drawing.Size(46, 13);
             this.labelSaldo.TabIndex = 6;
             this.labelSaldo.Text = "Saldo: 0";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Klassekasse files|*.kk";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Klassekasse files|*.kk";
             // 
             // FormMain
             // 
@@ -213,8 +227,10 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "FormMain";
-            this.Text = "Form1";
+            this.Text = "Klassekasse";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -229,7 +245,6 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem filerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem åbnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gemSomToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem afslutToolStripMenuItem;
@@ -244,6 +259,8 @@
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Label labelSaldo;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
