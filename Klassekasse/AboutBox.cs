@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace Klassekasse
 {
@@ -18,8 +17,8 @@ namespace Klassekasse
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelEmail.Text = AssemblyCopyright;
-            this.labelWebsite.Text = AssemblyCompany;
+            this.labelCopyright.Text = AssemblyCopyright;
+            this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
         }
 
@@ -102,22 +101,5 @@ namespace Klassekasse
             }
         }
         #endregion
-
-        private void labelWebsite_Click(object sender, EventArgs e)
-        {
-            process.StartInfo.FileName = @"https://github.com/mads256c";
-            process.Start();
-        }
-
-        private void labelEmail_Click(object sender, EventArgs e)
-        {
-            process.StartInfo.FileName = @"mailto:mads256c@elev.aatg.dk";
-            process.Start();
-        }
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

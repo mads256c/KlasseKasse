@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Klassekasse")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Et program som kan holde styr på klassekassen. Kan også bruges som et simpelt budget program.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mads Mogensen")]
 [assembly: AssemblyProduct("Klassekasse")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
