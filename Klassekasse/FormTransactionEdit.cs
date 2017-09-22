@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Klassekasse
     public partial class FormTransactionEdit : Form
     {
         public static string Description;
-        public static float? Diffrence;
+        public static double? Diffrence;
 
         public FormTransactionEdit()
         {
@@ -22,7 +23,7 @@ namespace Klassekasse
             Diffrence = null;
         }
 
-        public FormTransactionEdit(string description, float? diffrence)
+        public FormTransactionEdit(string description, double? diffrence)
         {
             InitializeComponent();
             Description = null;
@@ -33,7 +34,7 @@ namespace Klassekasse
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (float.TryParse(textBoxDiffrence.Text.Replace(".", ","), out float result))
+            if (double.TryParse(textBoxDiffrence.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out double result))
             {
                 Description = textBoxDescription.Text;
                 Diffrence = result;

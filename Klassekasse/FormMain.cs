@@ -19,16 +19,16 @@ namespace Klassekasse
         /// </summary>
         private void CalculateSaldo()
         {
-            float Saldo = 0;
+            double Saldo = 0;
             foreach (ListViewItem item in listView.Items)
             {
                 item.UseItemStyleForSubItems = false;
-                Saldo += float.Parse(item.SubItems[2].Text);
+                Saldo += double.Parse(item.SubItems[2].Text);
                 item.Text = Saldo.ToString();
 
                 item.SubItems[0].ForeColor = Saldo < 0 ? Color.Red : SystemColors.ControlText;
 
-                item.SubItems[2].ForeColor = float.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
+                item.SubItems[2].ForeColor = double.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
 
@@ -93,7 +93,7 @@ namespace Klassekasse
             if (listView.SelectedItems.Count == 1)
             {
                 //Creates a new FormTransactionEdit and passes values from listView into the form so they can be edited. Then it opens the form
-                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, float.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
+                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, double.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
                 ApplyEdits();
             }
             else
@@ -113,6 +113,7 @@ namespace Klassekasse
                 if (MessageBox.Show("Er du sikker på at du vil fjerne denne række?", "Er du sikker?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     listView.SelectedItems[0].Remove(); // Removes the selected row.
+                    CalculateSaldo();
                 }
             }
             else
