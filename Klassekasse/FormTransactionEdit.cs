@@ -21,7 +21,7 @@ namespace Klassekasse
     {
         /// <summary>
         /// Used to mask certan keys from the diffrence textbox.
-        /// TODO: A better solution should be worked out.
+        /// TODO: A better solution should be worked out. LOW PRIORITY
         /// </summary>
         public static readonly Keys[] Acceptedkeys = {
             Keys.D0, Keys.NumPad0, Keys.D1, Keys.NumPad1, Keys.D2, Keys.NumPad2, Keys.D3, Keys.NumPad3, Keys.D4, Keys.NumPad4, Keys.D5, Keys.NumPad5,

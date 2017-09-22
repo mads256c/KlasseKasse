@@ -55,7 +55,7 @@ namespace Klassekasse
         }
 
         /// <summary>
-        /// Saves with the name FileName.
+        /// Saves with the name fileName.
         /// </summary>
         /// <param name="fileName">The name of the file.</param>
         private void Save(string fileName)
@@ -64,12 +64,12 @@ namespace Klassekasse
             if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentException("Argument cannot be null or empty", nameof(fileName));
 
             //Take all info from the listview and put it into lists so it we later can save them in a file
-            var differenceList = new List<string>();
             var descriptionList = new List<string>();
+            var differenceList = new List<string>();
             foreach (ListViewItem item in listView.Items)
             {
-                differenceList.Add(item.SubItems[2].Text);
                 descriptionList.Add(item.SubItems[1].Text);
+                differenceList.Add(item.SubItems[2].Text);
             }
             //Try to save the file and show a messagebox that describes how it went
             MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, differenceList, descriptionList)
@@ -167,14 +167,22 @@ namespace Klassekasse
 
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            openFileDialog.InitialDirectory = Application.StartupPath;
-        }
-
         private void gemSomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveAs();
         }
+
+        /// <summary>
+        /// Fires when the form loads
+        /// </summary>
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+#if DEBUG
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            saveFileDialog.InitialDirectory = Application.StartupPath;
+#endif
+        }
+
+        
     }
 }
