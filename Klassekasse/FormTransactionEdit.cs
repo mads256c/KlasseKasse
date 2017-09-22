@@ -7,7 +7,7 @@ namespace Klassekasse
     public partial class FormTransactionEdit : Form
     {
         public static string Description;
-        public static double? Diffrence;
+        public static decimal? Diffrence;
 
         public FormTransactionEdit()
         {
@@ -16,7 +16,7 @@ namespace Klassekasse
             Diffrence = null;
         }
 
-        public FormTransactionEdit(string description, double? diffrence)
+        public FormTransactionEdit(string description, decimal? diffrence)
         {
             InitializeComponent();
             Description = null;
@@ -27,7 +27,7 @@ namespace Klassekasse
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (double.TryParse(textBoxDiffrence.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out double result))
+            if (decimal.TryParse(textBoxDiffrence.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out decimal result))
             {
                 Description = textBoxDescription.Text;
                 Diffrence = result;

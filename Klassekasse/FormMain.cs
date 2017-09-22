@@ -18,16 +18,16 @@ namespace Klassekasse
         /// </summary>
         private void CalculateSaldo()
         {
-            double saldo = 0;
+            decimal saldo = 0;
             foreach (ListViewItem item in listView.Items)
             {
                 item.UseItemStyleForSubItems = false;
-                saldo += double.Parse(item.SubItems[2].Text);
+                saldo += decimal.Parse(item.SubItems[2].Text);
                 item.Text = saldo.ToString(CultureInfo.CurrentCulture);
 
                 item.SubItems[0].ForeColor = saldo < 0 ? Color.Red : SystemColors.ControlText;
 
-                item.SubItems[2].ForeColor = double.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
+                item.SubItems[2].ForeColor = decimal.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
 
@@ -92,7 +92,7 @@ namespace Klassekasse
             if (listView.SelectedItems.Count == 1)
             {
                 //Creates a new FormTransactionEdit and passes values from listView into the form so they can be edited. Then it opens the form
-                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, double.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
+                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, decimal.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
                 ApplyEdits();
             }
             else
