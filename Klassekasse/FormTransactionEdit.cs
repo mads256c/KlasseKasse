@@ -20,7 +20,7 @@ namespace Klassekasse
     public partial class FormTransactionEdit : Form
     {
         /// <summary>
-        /// Used to mask certan keys from the diffrence textbox.
+        /// Used to mask certan keys from the difference textbox.
         /// TODO: A better solution should be worked out. LOW PRIORITY
         /// </summary>
         public static readonly Keys[] Acceptedkeys = {
@@ -47,12 +47,12 @@ namespace Klassekasse
         /// Use this when you want to preinitialize the textboxes on the form.
         /// </summary>
         /// <param name="description">The description in the listview row</param>
-        /// <param name="diffrence">The diffrence in the listview row</param>
-        public FormTransactionEdit(string description, decimal? diffrence)
+        /// <param name="difference">The difference in the listview row</param>
+        public FormTransactionEdit(string description, decimal difference)
         {
             InitializeComponent();
             textBoxDescription.Text = description;
-            textBoxDifference.Text = diffrence.ToString();
+            textBoxDifference.Text = difference.ToString(CultureInfo.CurrentCulture);
             Text = $"Ændring af {description}";
         }
 
