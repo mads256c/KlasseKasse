@@ -72,7 +72,7 @@ namespace Klassekasse
                 differenceList.Add(item.SubItems[2].Text);
             }
             //Try to save the file and show a messagebox that describes how it went
-            MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, differenceList, descriptionList)
+            MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, descriptionList, differenceList)
                 ? "Saved file successfully!"
                 : "Something went wrong!");
         }
