@@ -20,7 +20,7 @@ namespace Klassekasse
             List<ListViewItem> listViewItems = new List<ListViewItem>();
 
             //Loop over each line in the file the user have opened.
-            foreach (string line in File.ReadAllLines(fileName))
+            foreach (var line in File.ReadAllLines(fileName))
             {
                 //This case statement make sure that the file contents get put into the right places.
                 switch (line)

@@ -1,11 +1,14 @@
-﻿namespace Klassekasse
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Klassekasse
 {
     partial class FormTransactionEdit
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +33,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxDiffrence = new System.Windows.Forms.TextBox();
+            this.textBoxDifference = new System.Windows.Forms.TextBox();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -54,12 +57,13 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Beskrivelse:";
             // 
-            // textBoxDiffrence
+            // textBoxDifference
             // 
-            this.textBoxDiffrence.Location = new System.Drawing.Point(16, 27);
-            this.textBoxDiffrence.Name = "textBoxDiffrence";
-            this.textBoxDiffrence.Size = new System.Drawing.Size(256, 20);
-            this.textBoxDiffrence.TabIndex = 2;
+            this.textBoxDifference.Location = new System.Drawing.Point(16, 27);
+            this.textBoxDifference.Name = "textBoxDifference";
+            this.textBoxDifference.Size = new System.Drawing.Size(256, 20);
+            this.textBoxDifference.TabIndex = 2;
+            this.textBoxDifference.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxDifference_KeyDown);
             // 
             // textBoxDescription
             // 
@@ -98,7 +102,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.textBoxDiffrence);
+            this.Controls.Add(this.textBoxDifference);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -115,11 +119,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxDiffrence;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.Button buttonCancel;
+        private Label label1;
+        private Label label2;
+        private TextBox textBoxDifference;
+        private TextBox textBoxDescription;
+        private Button buttonOk;
+        private Button buttonCancel;
     }
 }

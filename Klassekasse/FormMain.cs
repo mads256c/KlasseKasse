@@ -25,8 +25,8 @@ namespace Klassekasse
                 saldo += decimal.Parse(item.SubItems[2].Text);
                 item.Text = saldo.ToString(CultureInfo.CurrentCulture);
 
+                //Set the color of the saldo and difference to red if less than 0 else normal color
                 item.SubItems[0].ForeColor = saldo < 0 ? Color.Red : SystemColors.ControlText;
-
                 item.SubItems[2].ForeColor = decimal.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
@@ -37,14 +37,11 @@ namespace Klassekasse
         /// <summary>
         /// Applies the edits from FormTransactionEdit
         /// </summary>
-        private void ApplyEdits()
+        private void ApplyEdits(TransactionData transactionData)
         {
-            if (FormTransactionEdit.Description != null && FormTransactionEdit.Diffrence != null)
-            {
-                listView.SelectedItems[0].SubItems[1].Text = FormTransactionEdit.Description.Replace(Environment.NewLine, "");
-                listView.SelectedItems[0].SubItems[2].Text = FormTransactionEdit.Diffrence.ToString();
-            }
-            CalculateSaldo();
+                listView.SelectedItems[0].SubItems[1].Text = transactionData.Description.Replace(Environment.NewLine, "");
+                listView.SelectedItems[0].SubItems[2].Text = transactionData.Difference.ToString(CultureInfo.CurrentCulture);
+                CalculateSaldo();
         }
 
         /// <summary>
@@ -52,10 +49,9 @@ namespace Klassekasse
         /// </summary>
         private void SaveAs()
         {
+            //If the user chose a filename and everything went right save the file.
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
                 Save(saveFileDialog.FileName);
-            }
         }
 
         /// <summary>
@@ -64,21 +60,19 @@ namespace Klassekasse
         /// <param name="fileName">The name of the file.</param>
         private void Save(string fileName)
         {
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentException("Argument cannot be null or empty", nameof(fileName));
-            }
+            //If argument is invalid throw an exception
+            if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentException("Argument cannot be null or empty", nameof(fileName));
 
-            List<string> diffrenceList = new List<string>();
-            List<string> descriptionList = new List<string>();
+            //Take all info from the listview and put it into lists so it we later can save them in a file
+            var differenceList = new List<string>();
+            var descriptionList = new List<string>();
             foreach (ListViewItem item in listView.Items)
             {
-
-                diffrenceList.Add(item.SubItems[2].Text);
+                differenceList.Add(item.SubItems[2].Text);
                 descriptionList.Add(item.SubItems[1].Text);
             }
-
-            MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, diffrenceList, descriptionList)
+            //Try to save the file and show a messagebox that describes how it went
+            MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, differenceList, descriptionList)
                 ? "Saved file successfully!"
                 : "Something went wrong!");
         }
@@ -91,9 +85,13 @@ namespace Klassekasse
             //Checks if the user has selected only one row.
             if (listView.SelectedItems.Count == 1)
             {
-                //Creates a new FormTransactionEdit and passes values from listView into the form so they can be edited. Then it opens the form
-                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, decimal.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
-                ApplyEdits();
+                using (FormTransactionEdit formTransactionEdit = new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, decimal.Parse(listView.SelectedItems[0].SubItems[2].Text)))
+                {
+                    if (formTransactionEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        ApplyEdits(formTransactionEdit.TransactionData);
+                    }
+                }
             }
             else
             {
@@ -127,18 +125,15 @@ namespace Klassekasse
         /// </summary>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            //Ask the user about row information
-            new FormTransactionEdit().ShowDialog(); // This function blocks this thread, so we have the values when we are done.
-
-            //Return if one of the values are null
-            if (FormTransactionEdit.Description != null && FormTransactionEdit.Diffrence != null)
+            using (FormTransactionEdit formTransactionEdit = new FormTransactionEdit())
             {
-                //Create a new ListViewItem
-                ListViewItem item = new ListViewItem();
-                item.Text = "0";
-                item.SubItems.AddRange(new[] { FormTransactionEdit.Description, FormTransactionEdit.Diffrence.ToString() });
-                listView.Items.Add(item); // Add the items
-                CalculateSaldo();
+                if (formTransactionEdit.ShowDialog() == DialogResult.OK)
+                {
+                    var item = new ListViewItem();
+                    item.SubItems.AddRange(new []{formTransactionEdit.TransactionData.Description, formTransactionEdit.TransactionData.Difference.ToString(CultureInfo.CurrentCulture)});
+                    listView.Items.Add(item);
+                    CalculateSaldo();
+                }
             }
         }
 

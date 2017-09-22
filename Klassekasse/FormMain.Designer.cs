@@ -1,11 +1,14 @@
-﻿namespace Klassekasse
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Klassekasse
 {
     partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -236,25 +239,25 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem filerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem åbnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gemSomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem afslutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem omToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
-        private System.Windows.Forms.ListView listView;
-        private System.Windows.Forms.ColumnHeader columnHeaderSaldo;
-        private System.Windows.Forms.ColumnHeader columnHeaderDescription;
-        private System.Windows.Forms.ColumnHeader columnHeaderDiffrence;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonRemove;
-        private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Label labelSaldo;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem filerToolStripMenuItem;
+        private ToolStripMenuItem åbnToolStripMenuItem;
+        private ToolStripMenuItem gemSomToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem afslutToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel toolStripStatusLabelStatus;
+        private ListView listView;
+        private ColumnHeader columnHeaderSaldo;
+        private ColumnHeader columnHeaderDescription;
+        private ColumnHeader columnHeaderDiffrence;
+        private Button buttonAdd;
+        private Button buttonRemove;
+        private Button buttonEdit;
+        private Label labelSaldo;
+        private OpenFileDialog openFileDialog;
+        private SaveFileDialog saveFileDialog;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Klassekasse
@@ -16,6 +17,7 @@ namespace Klassekasse
             textBoxDescription.Text = AssemblyDescription;
         }
 
+
         #region Assembly Attribute Accessors
 
         public string AssemblyTitle
@@ -31,7 +33,7 @@ namespace Klassekasse
                         return titleAttribute.Title;
                     }
                 }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
