@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
-using System.IO;
-using static System.Windows.Forms.ListViewItem;
 
 namespace Klassekasse
 {
@@ -19,20 +18,20 @@ namespace Klassekasse
         /// </summary>
         private void CalculateSaldo()
         {
-            double Saldo = 0;
+            double saldo = 0;
             foreach (ListViewItem item in listView.Items)
             {
                 item.UseItemStyleForSubItems = false;
-                Saldo += double.Parse(item.SubItems[2].Text);
-                item.Text = Saldo.ToString();
+                saldo += double.Parse(item.SubItems[2].Text);
+                item.Text = saldo.ToString(CultureInfo.CurrentCulture);
 
-                item.SubItems[0].ForeColor = Saldo < 0 ? Color.Red : SystemColors.ControlText;
+                item.SubItems[0].ForeColor = saldo < 0 ? Color.Red : SystemColors.ControlText;
 
                 item.SubItems[2].ForeColor = double.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
 
-            labelSaldo.Text = $"Saldo: {Saldo}";
+            labelSaldo.Text = $"Saldo: {saldo}";
         }
 
         /// <summary>
@@ -62,9 +61,14 @@ namespace Klassekasse
         /// <summary>
         /// Saves with the name FileName.
         /// </summary>
-        /// <param name="FileName">The name of the file.</param>
-        private void Save(string FileName)
+        /// <param name="fileName">The name of the file.</param>
+        private void Save(string fileName)
         {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentException("Argument cannot be null or empty", nameof(fileName));
+            }
+
             List<string> diffrenceList = new List<string>();
             List<string> descriptionList = new List<string>();
             foreach (ListViewItem item in listView.Items)
@@ -74,14 +78,9 @@ namespace Klassekasse
                 descriptionList.Add(item.SubItems[1].Text);
             }
 
-            if (FileHandling.SaveFile(saveFileDialog.FileName, diffrenceList, descriptionList))
-            {
-                MessageBox.Show("Saved file successfully!");
-            }
-            else
-            {
-                MessageBox.Show("Something went wrong!");
-            }
+            MessageBox.Show(FileHandling.SaveFile(saveFileDialog.FileName, diffrenceList, descriptionList)
+                ? "Saved file successfully!"
+                : "Something went wrong!");
         }
 
         /// <summary>
@@ -137,7 +136,7 @@ namespace Klassekasse
                 //Create a new ListViewItem
                 ListViewItem item = new ListViewItem();
                 item.Text = "0";
-                item.SubItems.AddRange(new string[] { FormTransactionEdit.Description, FormTransactionEdit.Diffrence.ToString() });
+                item.SubItems.AddRange(new[] { FormTransactionEdit.Description, FormTransactionEdit.Diffrence.ToString() });
                 listView.Items.Add(item); // Add the items
                 CalculateSaldo();
             }
@@ -145,7 +144,7 @@ namespace Klassekasse
 
         private void afslutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void omToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,7 +156,7 @@ namespace Klassekasse
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                List<ListViewItem> listViewItems = FileHandling.OpenFile(openFileDialog.FileName);
+                var listViewItems = FileHandling.OpenFile(openFileDialog.FileName);
                 if (listViewItems == null)
                 {
                     MessageBox.Show("File malformed or corrupt. Please correct the file.");

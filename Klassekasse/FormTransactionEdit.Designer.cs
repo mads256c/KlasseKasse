@@ -105,6 +105,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormTransactionEdit";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Tilføjning eller ændring";
             this.ResumeLayout(false);
             this.PerformLayout();

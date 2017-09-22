@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Klassekasse
@@ -38,7 +31,7 @@ namespace Klassekasse
             {
                 Description = textBoxDescription.Text;
                 Diffrence = result;
-                this.Close();
+                Close();
             }
             
         }
@@ -47,7 +40,7 @@ namespace Klassekasse
         {
             Description = null;
             Diffrence = null;
-            this.Close();
+            Close();
         }
 
         private void textBoxDescription_KeyDown(object sender, KeyEventArgs e)
