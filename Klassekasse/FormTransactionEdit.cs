@@ -13,23 +13,27 @@ namespace Klassekasse
     public partial class FormTransactionEdit : Form
     {
         public static string Description;
-        public static int? Diffrence;
+        public static float? Diffrence;
 
-        public FormTransactionEdit(string description, int? diffrence)
+        public FormTransactionEdit()
         {
             InitializeComponent();
             Description = null;
             Diffrence = null;
-            if (description != null && diffrence != null)
-            {
-                textBoxDescription.Text = description;
-                textBoxDiffrence.Text = diffrence.ToString();
-            }
+        }
+
+        public FormTransactionEdit(string description, float? diffrence)
+        {
+            InitializeComponent();
+            Description = null;
+            Diffrence = null;
+            textBoxDescription.Text = description;
+            textBoxDiffrence.Text = diffrence.ToString();
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textBoxDiffrence.Text, out int result))
+            if (float.TryParse(textBoxDiffrence.Text.Replace(".", ","), out float result))
             {
                 Description = textBoxDescription.Text;
                 Diffrence = result;

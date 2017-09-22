@@ -19,16 +19,16 @@ namespace Klassekasse
         /// </summary>
         private void CalculateSaldo()
         {
-            int Saldo = 0;
+            float Saldo = 0;
             foreach (ListViewItem item in listView.Items)
             {
                 item.UseItemStyleForSubItems = false;
-                Saldo += int.Parse(item.SubItems[2].Text);
+                Saldo += float.Parse(item.SubItems[2].Text);
                 item.Text = Saldo.ToString();
 
                 item.SubItems[0].ForeColor = Saldo < 0 ? Color.Red : SystemColors.ControlText;
 
-                item.SubItems[2].ForeColor = int.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
+                item.SubItems[2].ForeColor = float.Parse(item.SubItems[2].Text) < 0 ? Color.Red : SystemColors.ControlText;
 
             }
 
@@ -93,7 +93,7 @@ namespace Klassekasse
             if (listView.SelectedItems.Count == 1)
             {
                 //Creates a new FormTransactionEdit and passes values from listView into the form so they can be edited. Then it opens the form
-                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, int.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
+                new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, float.Parse(listView.SelectedItems[0].SubItems[2].Text)).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
                 ApplyEdits();
             }
             else
@@ -122,10 +122,13 @@ namespace Klassekasse
 
         }
 
+        /// <summary>
+        /// Fires when the Add button is pressed.
+        /// </summary>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             //Ask the user about row information
-            new FormTransactionEdit(null, null).ShowDialog(); // This function blocks this thread, so we have the values when we are done.
+            new FormTransactionEdit().ShowDialog(); // This function blocks this thread, so we have the values when we are done.
 
             //Return if one of the values are null
             if (FormTransactionEdit.Description != null && FormTransactionEdit.Diffrence != null)
