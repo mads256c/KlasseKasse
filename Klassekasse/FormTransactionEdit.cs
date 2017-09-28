@@ -61,6 +61,10 @@ namespace Klassekasse
         /// </summary>
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxDescription.Text))
+            {
+                MessageBox.Show("Beskrivelsen kan ikke være tom.");
+            }
             //Windows likes to change what the decimal seperator charactor is, so here is a hacky way to standardize it to the current locale.
             if (decimal.TryParse(textBoxDifference.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out decimal result))
             {

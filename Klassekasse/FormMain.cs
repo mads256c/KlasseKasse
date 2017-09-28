@@ -44,6 +44,88 @@ namespace Klassekasse
                 CalculateSaldo();
         }
 
+        private void InsertAbove()
+        {
+            if (listView.SelectedItems.Count == 1)
+            {
+                using (FormTransactionEdit formTransactionEdit = new FormTransactionEdit())
+                {
+                    if (formTransactionEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        var item = new ListViewItem();
+                        item.SubItems.AddRange(new[] { formTransactionEdit.TransactionData.Description, formTransactionEdit.TransactionData.Difference.ToString(CultureInfo.CurrentCulture) });
+                        listView.Items.Insert(listView.Items.IndexOf(listView.SelectedItems[0]), item);
+                        CalculateSaldo();
+                    }
+                }
+                
+            }
+        }
+
+        private void InsertBelow()
+        {
+            if (listView.SelectedItems.Count == 1)
+            {
+                using (FormTransactionEdit formTransactionEdit = new FormTransactionEdit())
+                {
+                    if (formTransactionEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        var item = new ListViewItem();
+                        item.SubItems.AddRange(new[] { formTransactionEdit.TransactionData.Description, formTransactionEdit.TransactionData.Difference.ToString(CultureInfo.CurrentCulture) });
+                        listView.Items.Insert(listView.Items.IndexOf(listView.SelectedItems[0]) + 1, item);
+                        CalculateSaldo();
+                    }
+                }
+
+            }
+        }
+
+
+        /// <summary>
+        /// Edits the selected item
+        /// </summary>
+        private void EditSelectedItem()
+        {
+            //Checks if the user has selected only one row.
+            if (listView.SelectedItems.Count == 1)
+            {
+                using (var formTransactionEdit = new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, decimal.Parse(listView.SelectedItems[0].SubItems[2].Text)))
+                {
+                    if (formTransactionEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        ApplyEdits(formTransactionEdit.TransactionData);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Makér en række."); //Tell the user to only select one row.
+            }
+        }
+
+        /// <summary>
+        /// Deletes the items that are selected.
+        /// </summary>
+        private void DeleteSelectedItems()
+        {
+            //Checks if the user has selected only one row.
+            if (listView.SelectedItems.Count > 0)
+            {
+                if (MessageBox.Show("Er du sikker på at du vil fjerne denne række?", "Er du sikker?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    foreach (ListViewItem item in listView.SelectedItems)
+                    {
+                        item.Remove();
+                    }
+                    CalculateSaldo();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Makér en række."); //Tell the user to only select one row.
+            }
+        }
+
         /// <summary>
         /// Opens the save as dialog and saves the file to that location.
         /// </summary>
@@ -57,7 +139,6 @@ namespace Klassekasse
         /// <summary>
         /// Saves with the name fileName.
         /// </summary>
-        /// <param name="fileName">The name of the file.</param>
         private void Save(string fileName)
         {
             //If argument is invalid throw an exception
@@ -82,21 +163,7 @@ namespace Klassekasse
         /// </summary>
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            //Checks if the user has selected only one row.
-            if (listView.SelectedItems.Count == 1)
-            {
-                using (FormTransactionEdit formTransactionEdit = new FormTransactionEdit(listView.SelectedItems[0].SubItems[1].Text, decimal.Parse(listView.SelectedItems[0].SubItems[2].Text)))
-                {
-                    if (formTransactionEdit.ShowDialog() == DialogResult.OK)
-                    {
-                        ApplyEdits(formTransactionEdit.TransactionData);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Makér en række."); //Tell the user to only select one row.
-            }
+            EditSelectedItem();
         }
 
         /// <summary>
@@ -104,19 +171,7 @@ namespace Klassekasse
         /// </summary>
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            //Checks if the user has selected only one row.
-            if (listView.SelectedItems.Count == 1)
-            {
-                if (MessageBox.Show("Er du sikker på at du vil fjerne denne række?", "Er du sikker?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    listView.SelectedItems[0].Remove(); // Removes the selected row.
-                    CalculateSaldo();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Makér en række."); //Tell the user to only select one row.
-            }
+            DeleteSelectedItems();
 
         }
 
@@ -183,6 +238,32 @@ namespace Klassekasse
 #endif
         }
 
-        
+        private void listView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ListViewcontextMenuStrip.Show(Cursor.Position);
+            }
+        }
+
+        private void aboveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InsertAbove();
+        }
+
+        private void underToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InsertBelow();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditSelectedItem();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedItems();
+        }
     }
 }

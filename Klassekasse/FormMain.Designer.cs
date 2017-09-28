@@ -31,6 +31,8 @@ namespace Klassekasse
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.filerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.åbnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,16 @@ namespace Klassekasse
             this.labelSaldo = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.ListViewcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.underToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.ListViewcontextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -80,26 +90,26 @@ namespace Klassekasse
             // åbnToolStripMenuItem
             // 
             this.åbnToolStripMenuItem.Name = "åbnToolStripMenuItem";
-            this.åbnToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.åbnToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.åbnToolStripMenuItem.Text = "Åbn";
             this.åbnToolStripMenuItem.Click += new System.EventHandler(this.åbnToolStripMenuItem_Click);
             // 
             // gemSomToolStripMenuItem
             // 
             this.gemSomToolStripMenuItem.Name = "gemSomToolStripMenuItem";
-            this.gemSomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gemSomToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.gemSomToolStripMenuItem.Text = "Gem som";
             this.gemSomToolStripMenuItem.Click += new System.EventHandler(this.gemSomToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
             // 
             // afslutToolStripMenuItem
             // 
             this.afslutToolStripMenuItem.Name = "afslutToolStripMenuItem";
-            this.afslutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.afslutToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.afslutToolStripMenuItem.Text = "Afslut";
             this.afslutToolStripMenuItem.Click += new System.EventHandler(this.afslutToolStripMenuItem_Click);
             // 
@@ -143,6 +153,7 @@ namespace Klassekasse
             this.listView.TabIndex = 2;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
             // 
             // columnHeaderSaldo
             // 
@@ -211,6 +222,58 @@ namespace Klassekasse
             // 
             this.saveFileDialog.Filter = "Klassekasse files|*.kk";
             // 
+            // ListViewcontextMenuStrip
+            // 
+            this.ListViewcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.toolStripSeparator,
+            this.deleteToolStripMenuItem});
+            this.ListViewcontextMenuStrip.Name = "ListViewcontextMenuStrip";
+            this.ListViewcontextMenuStrip.Size = new System.Drawing.Size(108, 76);
+            // 
+            // insertToolStripMenuItem
+            // 
+            this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboveToolStripMenuItem,
+            this.underToolStripMenuItem});
+            this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
+            this.insertToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.insertToolStripMenuItem.Text = "Insert";
+            // 
+            // aboveToolStripMenuItem
+            // 
+            this.aboveToolStripMenuItem.Name = "aboveToolStripMenuItem";
+            this.aboveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboveToolStripMenuItem.Text = "Above";
+            this.aboveToolStripMenuItem.Click += new System.EventHandler(this.aboveToolStripMenuItem_Click);
+            // 
+            // underToolStripMenuItem
+            // 
+            this.underToolStripMenuItem.Name = "underToolStripMenuItem";
+            this.underToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.underToolStripMenuItem.Text = "Under";
+            this.underToolStripMenuItem.Click += new System.EventHandler(this.underToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +286,7 @@ namespace Klassekasse
             this.Controls.Add(this.listView);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "FormMain";
@@ -232,6 +296,7 @@ namespace Klassekasse
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.ListViewcontextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +323,13 @@ namespace Klassekasse
         private Label labelSaldo;
         private OpenFileDialog openFileDialog;
         private SaveFileDialog saveFileDialog;
+        private ContextMenuStrip ListViewcontextMenuStrip;
+        private ToolStripMenuItem insertToolStripMenuItem;
+        private ToolStripMenuItem aboveToolStripMenuItem;
+        private ToolStripMenuItem underToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 
