@@ -7,14 +7,16 @@ namespace Klassekasse
 {
     public struct TransactionData
     {
-        public TransactionData(string description, decimal difference)
+        public TransactionData(string description, decimal difference, bool isDeposit)
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
             Difference = difference;
+            IsDeposit = isDeposit;
         }
 
         public string Description;
         public decimal Difference;
+        public bool IsDeposit;
     }
 
     public partial class FormTransactionEdit : Form
@@ -25,7 +27,7 @@ namespace Klassekasse
         /// </summary>
         public static readonly Keys[] Acceptedkeys = {
             Keys.D0, Keys.NumPad0, Keys.D1, Keys.NumPad1, Keys.D2, Keys.NumPad2, Keys.D3, Keys.NumPad3, Keys.D4, Keys.NumPad4, Keys.D5, Keys.NumPad5,
-            Keys.D6, Keys.NumPad6, Keys.D7, Keys.NumPad7, Keys.D8, Keys.NumPad8, Keys.D9, Keys.NumPad9, Keys.OemMinus, Keys.Decimal, Keys.Oemcomma,
+            Keys.D6, Keys.NumPad6, Keys.D7, Keys.NumPad7, Keys.D8, Keys.NumPad8, Keys.D9, Keys.NumPad9, Keys.Decimal, Keys.Oemcomma,
             Keys.OemPeriod, Keys.Back, Keys.Delete, Keys.Up, Keys.Down, Keys.Left, Keys.Right
         };
 
@@ -48,11 +50,21 @@ namespace Klassekasse
         /// </summary>
         /// <param name="description">The description in the listview row</param>
         /// <param name="difference">The difference in the listview row</param>
-        public FormTransactionEdit(string description, decimal difference)
+        /// <param name="isDeposit">If the transaction is a deposit or a payment</param>
+        public FormTransactionEdit(string description, decimal difference, bool isDeposit)
         {
             InitializeComponent();
             textBoxDescription.Text = description;
             textBoxDifference.Text = difference.ToString(CultureInfo.CurrentCulture);
+            if (isDeposit)
+            {
+                radioButtonDeposit.Checked = true;
+            }
+            else
+            {
+                radioButtonPayment.Checked = true;
+            }
+
             Text = $"Ændring af {description}";
         }
 
@@ -68,7 +80,7 @@ namespace Klassekasse
             //Windows likes to change what the decimal seperator charactor is, so here is a hacky way to standardize it to the current locale.
             if (decimal.TryParse(textBoxDifference.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out decimal result))
             {
-                TransactionData = new TransactionData(textBoxDescription.Text, result);
+                TransactionData = new TransactionData(textBoxDescription.Text, result, radioButtonDeposit.Checked);
                 DialogResult = DialogResult.OK;
                 Close();
             }

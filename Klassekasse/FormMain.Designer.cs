@@ -40,8 +40,6 @@ namespace Klassekasse
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.afslutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.omToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeaderSaldo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,7 +58,6 @@ namespace Klassekasse
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.ListViewcontextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,22 +116,6 @@ namespace Klassekasse
             this.omToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.omToolStripMenuItem.Text = "Om";
             this.omToolStripMenuItem.Click += new System.EventHandler(this.omToolStripMenuItem_Click);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelStatus});
-            this.statusStrip.Location = new System.Drawing.Point(0, 475);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(836, 22);
-            this.statusStrip.TabIndex = 1;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabelStatus
-            // 
-            this.toolStripStatusLabelStatus.Name = "toolStripStatusLabelStatus";
-            this.toolStripStatusLabelStatus.Size = new System.Drawing.Size(61, 17);
-            this.toolStripStatusLabelStatus.Text = "Status: OK";
             // 
             // listView
             // 
@@ -230,7 +211,7 @@ namespace Klassekasse
             this.toolStripSeparator,
             this.deleteToolStripMenuItem});
             this.ListViewcontextMenuStrip.Name = "ListViewcontextMenuStrip";
-            this.ListViewcontextMenuStrip.Size = new System.Drawing.Size(108, 76);
+            this.ListViewcontextMenuStrip.Size = new System.Drawing.Size(109, 76);
             // 
             // insertToolStripMenuItem
             // 
@@ -238,14 +219,14 @@ namespace Klassekasse
             this.aboveToolStripMenuItem,
             this.underToolStripMenuItem});
             this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
-            this.insertToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.insertToolStripMenuItem.Text = "Insert";
+            this.insertToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.insertToolStripMenuItem.Text = "Insæt";
             // 
             // aboveToolStripMenuItem
             // 
             this.aboveToolStripMenuItem.Name = "aboveToolStripMenuItem";
             this.aboveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboveToolStripMenuItem.Text = "Above";
+            this.aboveToolStripMenuItem.Text = "Over";
             this.aboveToolStripMenuItem.Click += new System.EventHandler(this.aboveToolStripMenuItem_Click);
             // 
             // underToolStripMenuItem
@@ -258,21 +239,21 @@ namespace Klassekasse
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.editToolStripMenuItem.Text = "Ændre";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.deleteToolStripMenuItem.Text = "Fjern";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(105, 6);
             // 
             // FormMain
             // 
@@ -284,7 +265,6 @@ namespace Klassekasse
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.listView);
-            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
@@ -294,8 +274,6 @@ namespace Klassekasse
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ListViewcontextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -311,8 +289,6 @@ namespace Klassekasse
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem afslutToolStripMenuItem;
         private ToolStripMenuItem omToolStripMenuItem;
-        private StatusStrip statusStrip;
-        private ToolStripStatusLabel toolStripStatusLabelStatus;
         private ListView listView;
         private ColumnHeader columnHeaderSaldo;
         private ColumnHeader columnHeaderDescription;

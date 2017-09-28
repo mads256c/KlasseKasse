@@ -37,6 +37,8 @@ namespace Klassekasse
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.radioButtonDeposit = new System.Windows.Forms.RadioButton();
+            this.radioButtonPayment = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -44,9 +46,9 @@ namespace Klassekasse
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Forskel:";
+            this.label1.Text = "Ind/Udbetaling:";
             // 
             // label2
             // 
@@ -61,7 +63,7 @@ namespace Klassekasse
             // 
             this.textBoxDifference.Location = new System.Drawing.Point(16, 27);
             this.textBoxDifference.Name = "textBoxDifference";
-            this.textBoxDifference.Size = new System.Drawing.Size(256, 20);
+            this.textBoxDifference.Size = new System.Drawing.Size(173, 20);
             this.textBoxDifference.TabIndex = 2;
             this.textBoxDifference.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxDifference_KeyDown);
             // 
@@ -94,11 +96,36 @@ namespace Klassekasse
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // radioButtonDeposit
+            // 
+            this.radioButtonDeposit.AutoSize = true;
+            this.radioButtonDeposit.Checked = true;
+            this.radioButtonDeposit.Location = new System.Drawing.Point(195, 13);
+            this.radioButtonDeposit.Name = "radioButtonDeposit";
+            this.radioButtonDeposit.Size = new System.Drawing.Size(77, 17);
+            this.radioButtonDeposit.TabIndex = 6;
+            this.radioButtonDeposit.TabStop = true;
+            this.radioButtonDeposit.Text = "Indbetaling";
+            this.radioButtonDeposit.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonPayment
+            // 
+            this.radioButtonPayment.AutoSize = true;
+            this.radioButtonPayment.Location = new System.Drawing.Point(195, 36);
+            this.radioButtonPayment.Name = "radioButtonPayment";
+            this.radioButtonPayment.Size = new System.Drawing.Size(76, 17);
+            this.radioButtonPayment.TabIndex = 7;
+            this.radioButtonPayment.TabStop = true;
+            this.radioButtonPayment.Text = "Udbetaling";
+            this.radioButtonPayment.UseVisualStyleBackColor = true;
+            // 
             // FormTransactionEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.radioButtonPayment);
+            this.Controls.Add(this.radioButtonDeposit);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBoxDescription);
@@ -125,5 +152,7 @@ namespace Klassekasse
         private TextBox textBoxDescription;
         private Button buttonOk;
         private Button buttonCancel;
+        private RadioButton radioButtonDeposit;
+        private RadioButton radioButtonPayment;
     }
 }
