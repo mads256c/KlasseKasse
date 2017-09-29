@@ -40,7 +40,12 @@ namespace Klassekasse
         private void ApplyEdits(TransactionData transactionData)
         {
                 listView.SelectedItems[0].SubItems[1].Text = transactionData.Description.Replace(Environment.NewLine, "");
-                listView.SelectedItems[0].SubItems[2].Text = transactionData.Difference.ToString(CultureInfo.CurrentCulture);
+            decimal multiplier;
+            if (transactionData.IsDeposit)
+                multiplier = 1;
+            else
+                multiplier = -1;
+                listView.SelectedItems[0].SubItems[2].Text = (transactionData.Difference * multiplier).ToString(CultureInfo.CurrentCulture);
                 CalculateSaldo();
         }
 
@@ -81,7 +86,18 @@ namespace Klassekasse
                     if (formTransactionEdit.ShowDialog() == DialogResult.OK)
                     {
                         var item = new ListViewItem();
-                        item.SubItems.AddRange(new[] { formTransactionEdit.TransactionData.Description, formTransactionEdit.TransactionData.Difference.ToString(CultureInfo.CurrentCulture) });
+                        decimal multiplier;
+                        if (formTransactionEdit.TransactionData.IsDeposit)
+                        {
+                            multiplier = 1;
+                        }
+                        else
+                        {
+                            multiplier = -1;
+                        }
+
+                        item.SubItems.AddRange(new[] { formTransactionEdit.TransactionData.Description, (formTransactionEdit.TransactionData.Difference * multiplier).ToString(CultureInfo.CurrentCulture) });
+
                         listView.Items.Insert(listView.Items.IndexOf(listView.SelectedItems[0]) + 1, item);
                         CalculateSaldo();
                     }
@@ -195,7 +211,17 @@ namespace Klassekasse
                 if (formTransactionEdit.ShowDialog() == DialogResult.OK)
                 {
                     var item = new ListViewItem();
-                    item.SubItems.AddRange(new []{formTransactionEdit.TransactionData.Description, formTransactionEdit.TransactionData.Difference.ToString(CultureInfo.CurrentCulture)});
+                    decimal multiplier;
+                    if (formTransactionEdit.TransactionData.IsDeposit)
+                    {
+                        multiplier = 1;
+                    }
+                    else
+                    {
+                        multiplier = -1;
+                    }
+
+                    item.SubItems.AddRange(new[] { formTransactionEdit.TransactionData.Description, (formTransactionEdit.TransactionData.Difference * multiplier).ToString(CultureInfo.CurrentCulture) });
                     listView.Items.Add(item);
                     CalculateSaldo();
                 }

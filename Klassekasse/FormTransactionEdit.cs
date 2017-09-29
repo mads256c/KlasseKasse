@@ -55,14 +55,18 @@ namespace Klassekasse
         {
             InitializeComponent();
             textBoxDescription.Text = description;
-            textBoxDifference.Text = difference.ToString(CultureInfo.CurrentCulture);
+            
             if (isDeposit)
             {
                 radioButtonDeposit.Checked = true;
+                radioButtonPayment.Checked = false;
+                textBoxDifference.Text = (difference * 1).ToString(CultureInfo.CurrentCulture);
             }
             else
             {
+                radioButtonDeposit.Checked = false;
                 radioButtonPayment.Checked = true;
+                textBoxDifference.Text = (difference * -1).ToString(CultureInfo.CurrentCulture);
             }
 
             Text = $"Ændring af {description}";
@@ -76,6 +80,7 @@ namespace Klassekasse
             if (string.IsNullOrWhiteSpace(textBoxDescription.Text))
             {
                 MessageBox.Show("Beskrivelsen kan ikke være tom.");
+                return;
             }
             //Windows likes to change what the decimal seperator charactor is, so here is a hacky way to standardize it to the current locale.
             if (decimal.TryParse(textBoxDifference.Text.Replace(',', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)).Replace('.', Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)), out decimal result))

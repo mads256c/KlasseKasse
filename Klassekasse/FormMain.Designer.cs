@@ -55,8 +55,8 @@ namespace Klassekasse
             this.aboveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.underToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.ListViewcontextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -148,7 +148,7 @@ namespace Klassekasse
             // 
             // columnHeaderDiffrence
             // 
-            this.columnHeaderDiffrence.Text = "Forskel";
+            this.columnHeaderDiffrence.Text = "Beløb";
             this.columnHeaderDiffrence.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderDiffrence.Width = 71;
             // 
@@ -225,14 +225,14 @@ namespace Klassekasse
             // aboveToolStripMenuItem
             // 
             this.aboveToolStripMenuItem.Name = "aboveToolStripMenuItem";
-            this.aboveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboveToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.aboveToolStripMenuItem.Text = "Over";
             this.aboveToolStripMenuItem.Click += new System.EventHandler(this.aboveToolStripMenuItem_Click);
             // 
             // underToolStripMenuItem
             // 
             this.underToolStripMenuItem.Name = "underToolStripMenuItem";
-            this.underToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.underToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.underToolStripMenuItem.Text = "Under";
             this.underToolStripMenuItem.Click += new System.EventHandler(this.underToolStripMenuItem_Click);
             // 
@@ -243,17 +243,17 @@ namespace Klassekasse
             this.editToolStripMenuItem.Text = "Ændre";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(105, 6);
+            // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.deleteToolStripMenuItem.Text = "Fjern";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(105, 6);
             // 
             // FormMain
             // 
